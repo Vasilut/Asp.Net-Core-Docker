@@ -1,55 +1,19 @@
-﻿@{ 
+﻿@{
     ViewBag.Title = "Home Page";
 }
 
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>The World - @ViewBag.Title</title>
-    <link rel="stylesheet" href="css/site.css" />
-</head>
-<body>
-    <div id="sidebar">
-        <img src="img/sitecore.jpg" alt="headshot" class="headshot" />
-        <span id="username">Lucian Vasilut</span>
+<h1>The world </h1>
+<p>This will be a fun website soon!</p>
 
-        <ul class="menu">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-
+<form>
+    <div>
+        <label>Date</label>
+        <input />
     </div>
-    <div id="wrapper">
-        <div id="main">
-            <div>
-                <button id="sidebarToggle">
-                    ToggleMenu
-                </button>
-            </div>
-            <h1>The world </h1>
-            <p>This will be a fun website soon!</p>
-
-            <form>
-                <div>
-                    <label>Date</label>
-                    <input />
-                </div>
-                <div>
-                    <label>Location</label>
-                    <input />
-                </div>
-                <div><input type="submit" value="Add" /></div>
-            </form>
-        </div>
-        <div id="footer">
-            &copy; 2017 Lucian
-        </div>
+    <div>
+        <label>Location</label>
+        <input />
     </div>
-    <script type="text/javascript" src="lib/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="js/site.js">
-    </script>
-</body>
-</html>
+    <div><input type="submit" value="Add" /></div>
+</form>
