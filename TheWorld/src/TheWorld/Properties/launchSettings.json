@@ -12,6 +12,8 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
+        "Key": "Value",
+        "MailSettings__ToAdress": "lucian_chelsea_10@yahoo.com",
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
