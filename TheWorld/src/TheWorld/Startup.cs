@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using TheWorld.Services;
 using Microsoft.Extensions.Configuration;
+using TheWorld.Models;
 
 namespace TheWorld
 {
@@ -40,6 +41,7 @@ namespace TheWorld
             {
                 //implement another one
             }
+            services.AddDbContext<WorldContext>();
             services.AddMvc();
         }
 
