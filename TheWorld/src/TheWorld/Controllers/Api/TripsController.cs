@@ -29,18 +29,28 @@ namespace TheWorld.Controllers.Api
             }
             catch (Exception ex)
             {
+                //Loggin
 
                 return BadRequest(ex);
             }
         }
 
         [HttpPost("")]
-        public IActionResult Post([FromBody]TripViewModel theTrip)
+        public async Task<IActionResult> Post([FromBody]TripViewModel theTrip)
         {
             if (ModelState.IsValid)
             {
+                //Save to the db
                 var newTrip = Mapper.Map<Trip>(theTrip);
-                return Created($"api/trips/{theTrip.Name}",Mapper.Map<TripViewModel>(newTrip));
+                _repo.AddTrip(newTrip);
+                if (await _repo.SaveChangesAsync())
+                {
+                    return Created($"api/trips/{theTrip.Name}", Mapper.Map<TripViewModel>(newTrip));
+                }
+                else
+                {
+                    return BadRequest("Failed to save changes in db");
+                }
             }
             return BadRequest("Bad Data");
         }
