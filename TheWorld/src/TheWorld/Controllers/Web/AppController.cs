@@ -1,9 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using TheWorld.Models;
 using TheWorld.Services;
 using TheWorld.ViewModels;
@@ -26,13 +23,19 @@ namespace TheWorld.Controllers.Web
         }
         public IActionResult Index()
         {
-            var data = _repo.GetAllTrips();
-            return View(data);
+            return View();
         }
 
         public IActionResult Contact()
         {
             return View();
+        }
+        
+        [Authorize]
+        public IActionResult Trips()
+        {
+            var data = _repo.GetAllTrips();
+            return View(data);
         }
 
         [HttpPost]

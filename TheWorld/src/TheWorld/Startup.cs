@@ -13,6 +13,7 @@ using TheWorld.Models;
 using Newtonsoft.Json.Serialization;
 using AutoMapper;
 using TheWorld.ViewModels;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace TheWorld
 {
@@ -44,6 +45,16 @@ namespace TheWorld
             {
                 //implement another one
             }
+
+            services.AddIdentity<WorldUser, IdentityRole>(
+                config => {
+                    config.User.RequireUniqueEmail = true;
+                    config.Password.RequiredLength = 8;
+                    config.Cookies.ApplicationCookie.LoginPath = @"/Auth/Login";
+                }
+            ).AddEntityFrameworkStores<WorldContext>();
+
+
             services.AddDbContext<WorldContext>();
             services.AddTransient<WorldContextSeedData>();
             services.AddScoped<IWorldRepository, WorldRepository>();
@@ -75,6 +86,9 @@ namespace TheWorld
             }
             //app.UseDefaultFiles();
             app.UseStaticFiles();
+
+            app.UseIdentity();
+
             app.UseMvc(config =>
             {
                 config.MapRoute(
