@@ -2,5 +2,13 @@
   {
     "outputFile": "wwwroot/js/site.es5.js",
     "inputFile": "wwwroot/js/site.js"
+  },
+  {
+    "outputFile": "wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.es5.js",
+    "inputFile": "wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"
+  },
+  {
+    "outputFile": "wwwroot/lib/jquery-validation/dist/jquery.validate.es5.js",
+    "inputFile": "wwwroot/lib/jquery-validation/dist/jquery.validate.js"
   }
 ]
