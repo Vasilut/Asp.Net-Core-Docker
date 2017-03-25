@@ -14,6 +14,7 @@ using Newtonsoft.Json.Serialization;
 using AutoMapper;
 using TheWorld.ViewModels;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 
 namespace TheWorld
 {
@@ -47,7 +48,8 @@ namespace TheWorld
             }
 
             services.AddIdentity<WorldUser, IdentityRole>(
-                config => {
+                config =>
+                {
                     config.User.RequireUniqueEmail = true;
                     config.Password.RequiredLength = 8;
                     config.Cookies.ApplicationCookie.LoginPath = @"/Auth/Login";
@@ -58,8 +60,13 @@ namespace TheWorld
             services.AddDbContext<WorldContext>();
             services.AddTransient<WorldContextSeedData>();
             services.AddScoped<IWorldRepository, WorldRepository>();
-            services.AddMvc()
-                .AddJsonOptions(config =>
+            services.AddMvc(config =>
+            {
+                if (_env.IsProduction())
+                {
+                    config.Filters.Add(new RequireHttpsAttribute());
+                }
+            }).AddJsonOptions(config =>
                 {
                     config.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                 }
