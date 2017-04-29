@@ -26,8 +26,9 @@ namespace TheWorld.Controllers.Api
         {
             try
             {
+                var trips = _repo.GetUserTripsWithStops(User.Identity.Name);
                 var result = _repo.GetAllTrips();
-                return Ok(Mapper.Map<IEnumerable<TripViewModel>>(result));
+                return Ok(Mapper.Map<IEnumerable<TripViewModel>>(trips));
             }
             catch (Exception ex)
             {
@@ -44,6 +45,8 @@ namespace TheWorld.Controllers.Api
             {
                 //Save to the db
                 var newTrip = Mapper.Map<Trip>(theTrip);
+                newTrip.UserName = User.Identity.Name;
+
                 _repo.AddTrip(newTrip);
                 if (await _repo.SaveChangesAsync())
                 {

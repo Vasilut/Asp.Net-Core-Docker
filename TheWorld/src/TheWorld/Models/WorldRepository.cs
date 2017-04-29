@@ -35,20 +35,37 @@ namespace TheWorld.Models
             return _context.Stops.ToList();
         }
 
-        public Trip GetTripByName(string tripName)
+        public Trip GetTripByName(string tripName,string userName)
         {
             return _context.Trips
                    .Include(t => t.Stops)
-                   .Where(x => x.Name == tripName).FirstOrDefault();
+                   .Where(x => x.Name == tripName && x.UserName == userName).FirstOrDefault();
         }
 
-        public void AddStop(string tripName, Stop newStop)
+        public void AddStop(string tripName, string userName, Stop newStop)
         {
-            var trip = GetTripByName(tripName);
+            var trip = GetTripByName(tripName,userName);
             if(trip != null)
             {
                 trip.Stops.Add(newStop);
                 _context.Stops.Add(newStop);
+            }
+        }
+
+        public IEnumerable<Trip> GetUserTripsWithStops(string name)
+        {
+            try
+            {
+                return _context.Trips
+                    .Include(t => t.Stops)
+                    .OrderBy(t => t.Name)
+                    .Where(t => t.UserName == name)
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
             }
         }
     }
