@@ -7,6 +7,7 @@ function () {
            .controller("tripsController", tripsController);
 
     function tripsController($http) {
+
         var vm = this;
         vm.trips = [];
 
@@ -27,9 +28,26 @@ function () {
                 vm.isBusy = false;
             });
 
+
         vm.addTrip = function () {
-            vm.trips.push({ name: vm.newTrip.name, created: new Date() });
-            vm.newTrip = {};
+
+            vm.isBusy = true;
+            vm.errorMessage = "";
+
+            $http.post("/api/trips", vm.newTrip)
+                .then(function (response) {
+                    //succes
+                    vm.trips.push(response.data);
+                    vm.newTrip = {};
+                },
+                 function (error) {
+                     //failure
+                    vm.errorMessage = "Failed to save new trip: ";
+                 })
+                .finally(function () {
+                    vm.isBusy = false;
+                });
+
         }
     }
 }
