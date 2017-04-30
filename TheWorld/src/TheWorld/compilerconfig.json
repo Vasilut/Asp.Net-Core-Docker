@@ -10,5 +10,9 @@
   {
     "outputFile": "wwwroot/lib/jquery-validation/dist/jquery.validate.es5.js",
     "inputFile": "wwwroot/lib/jquery-validation/dist/jquery.validate.js"
+  },
+  {
+    "outputFile": "wwwroot/lib/angular/angular.es5.js",
+    "inputFile": "wwwroot/lib/angular/angular.js"
   }
 ]
